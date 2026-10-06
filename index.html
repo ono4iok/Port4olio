@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Onofiok Ekong | Video Editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fbfbfd;--bg2:#f5f5f7;--card:#fff;--text:#1d1d1f;--muted:#6e6e73;--line:#d2d2d7;--accent:#0071e3;--accent-h:#0077ed;--nav:rgba(251,251,253,.72);
+--font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Inter","Helvetica Neue",Arial,sans-serif}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--bg2:#161617;--card:#1d1d1f;--text:#f5f5f7;--muted:#a1a1a6;--line:#424245;--accent:#2997ff;--accent-h:#47a6ff;--nav:rgba(22,22,23,.72)}}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:60px}
+body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.47;letter-spacing:-.011em}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+nav{position:sticky;top:0;z-index:20;height:48px;display:flex;align-items:center;justify-content:center;gap:28px;background:var(--nav);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line);font-size:12px;padding:0 16px;overflow-x:auto;white-space:nowrap}
+nav a{color:var(--muted);transition:color .2s}nav a:hover{color:var(--text)}
+.btn{display:inline-block;font:inherit;font-size:15px;font-weight:500;border:0;border-radius:980px;padding:10px 22px;background:var(--accent);color:#fff;cursor:pointer;transition:background .2s}
+.btn:hover{background:var(--accent-h)}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.btn.ghost:hover{background:var(--accent);color:#fff}
+header.hero{text-align:center;padding:96px 22px 80px}
+.hero p.k{font-size:21px;font-weight:600;color:var(--muted);margin-bottom:8px}
+.hero h1{font-size:clamp(44px,8.5vw,92px);font-weight:700;letter-spacing:-.045em;line-height:1.05;max-width:900px;margin:0 auto}
+.hero .sub{font-size:clamp(19px,2.4vw,26px);color:var(--muted);max-width:640px;margin:20px auto 32px;line-height:1.3;letter-spacing:-.02em}
+.hero .row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+section{padding:80px 22px}
+section:nth-of-type(even){background:var(--bg2)}
+.wrap{max-width:1080px;margin:0 auto}
+h2{font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-.035em;line-height:1.1}
+.lead{color:var(--muted);font-size:19px;margin:10px 0 36px;max-width:560px;letter-spacing:-.015em}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.vid{position:relative;width:100%;background:var(--card);border-radius:20px;overflow:hidden;cursor:pointer;border:0;text-align:left;font:inherit;color:inherit;padding:0;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;display:block}
+.vid:hover{transform:scale(1.025);box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.vid .th{aspect-ratio:16/9;background:#000 center/cover no-repeat;position:relative}
+.vid.sq .th{aspect-ratio:1/1}
+.vid .play{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.vid .play::after{content:"";position:absolute;left:23px;top:18px;border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent}
+.vid .meta{padding:14px 18px 18px}
+.vid .meta b{display:block;font-weight:600;font-size:17px;letter-spacing:-.02em}
+.vid .meta span{color:var(--muted);font-size:14px}
+.songs{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.feature{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;background:var(--card);border-radius:28px;padding:44px}
+.feature h3{font-size:28px;letter-spacing:-.03em;font-weight:700}
+.feature p{color:var(--muted);font-size:17px;margin-top:6px}
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.tool{background:var(--card);border-radius:22px;padding:28px 20px;text-align:center;font-weight:600;font-size:16px}
+.tool i{display:grid;place-items:center;width:64px;height:64px;border-radius:16px;margin:0 auto 14px;font-style:normal;font-weight:700;font-size:22px;color:#fff;letter-spacing:-.03em}
+footer{padding:56px 22px;text-align:center;color:var(--muted);font-size:15px}
+footer b{display:block;color:var(--text);font-size:21px;font-weight:600;letter-spacing:-.025em;margin-bottom:4px}
+footer a{color:var(--accent)}
+dialog{border:0;border-radius:20px;padding:0;width:min(960px,94vw);background:#000;overflow:hidden;color:#fff}
+dialog::backdrop{background:rgba(0,0,0,.7);backdrop-filter:blur(8px)}
+dialog .fr{width:100%}
+dialog .fr.v{aspect-ratio:16/9}
+dialog iframe{width:100%;height:100%;border:0;display:block}
+dialog .bar{display:flex;justify-content:flex-end;gap:10px;padding:10px}
+.btn.sm{font-size:13px;padding:6px 14px}
+@media (max-width:600px){.feature{padding:28px}section{padding:56px 18px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav><a href="#work">Work</a><a href="#music">Music</a><a href="#tools">Tools</a><a href="#drive" id="driveNav" hidden>Drive</a></nav>
+
+<header class="hero">
+  <p class="k">Video Editor · Remote</p>
+  <h1>Onofiok Ekong</h1>
+  <p class="sub">I turn raw footage into stories people watch to the end. Available worldwide, working remotely.</p>
+  <div class="row">
+    <a class="btn" href="mailto:onozzstudios@gmail.com">Hire me</a>
+    <a class="btn ghost" href="#work">See my work</a>
+  </div>
+</header>
+
+<section id="work"><div class="wrap">
+  <h2>My work</h2>
+  <p class="lead">A selection of videos I've edited.</p>
+  <div class="grid" id="videos"></div>
+</div></section>
+
+<section id="music"><div class="wrap">
+  <h2>Music</h2>
+  <p class="lead">Tracks I've made, on Spotify.</p>
+  <div class="grid songs" id="songs"></div>
+  <p style="margin-top:28px"><a class="btn ghost" href="https://open.spotify.com/artist/4jgnXII6BitNTZ0IwUYEfX" target="_blank" rel="noopener">Open my Spotify</a></p>
+</div></section>
+
+<section id="tools"><div class="wrap">
+  <h2>My tools</h2>
+  <p class="lead">The software behind every cut.</p>
+  <div class="tools">
+    <div class="tool"><i style="background:#2b1a6b">Pr</i>Adobe Premiere Pro</div>
+    <div class="tool"><i style="background:#1b1033">Ae</i>After Effects</div>
+    <div class="tool"><i style="background:#111">Cc</i>CapCut</div>
+    <div class="tool"><i style="background:#7d2ae8">Ca</i>Canva</div>
+    <div class="tool"><i style="background:#f58a1f">FL</i>FL Studio</div>
+  </div>
+</div></section>
+
+<section id="drive" hidden><div class="wrap">
+  <div class="feature">
+    <div><h3>Full project folder</h3><p>Long-form edits and deliverables, shared on Google Drive.</p></div>
+    <a class="btn" id="driveBtn" href="#" target="_blank" rel="noopener">Open Google Drive</a>
+  </div>
+</div></section>
+
+<footer>
+  <b>Onofiok Ekong</b>
+  <a href="mailto:onozzstudios@gmail.com">onozzstudios@gmail.com</a>
+</footer>
+
+<dialog id="player">
+  <div class="bar"><a class="btn sm" id="spLink" href="#" target="_blank" rel="noopener" hidden>Open in Spotify</a><button class="btn sm" id="closeP" type="button">Close</button></div>
+  <div class="fr" id="frame"></div>
+</dialog>
+
+<script>
+(function(){
+  /* ---- Edit these ---- */
+  var VIDEOS=["XCbL7OqefTI","7Y8saDxH6t0","XZAQVZFa9rk","kLm137DkUnQ","qaPv8X-I75Y","D8MhN6tlGrQ","0nij1iL-bJc","ML1LYxxL0mE","9USD9T_IVGU","XZEY1R861t8","sRKbqAdOYJ8","r1ElTa3uQdw","Ok99DroBR6Y","XRsLmF6ORj0","a_KwFcXfqiY","CCcuXYW6kBI","VyvapGrFl-M","W4JO-5bFvUU","3YKZmAIMRsg","WXmVlczpykI"];
+  var DRIVE_URL="";   // paste your Google Drive link here to show the Drive section
+  var SPOTIFY_ARTIST="4jgnXII6BitNTZ0IwUYEfX";
+  var ARTIST_IMG="https://i.scdn.co/image/ab6761610000e5eb95214035801207261312f550";
+  // Add a Spotify track ID (the text after /track/ in a song link) to play that exact song.
+  var SONGS=[{title:"All Eyes On Me",track:""},{title:"Watch Me Move",track:""}];
+  /* -------------------- */
+  var $=function(s){return document.querySelector(s)};
+  var dlg=$("#player"),frame=$("#frame"),sp=$("#spLink");
+
+  $("#videos").innerHTML=VIDEOS.map(function(id){
+    return '<button class="vid" data-yt="'+id+'" aria-label="Play video"><div class="th" style="background-image:url(https://img.youtube.com/vi/'+id+'/hqdefault.jpg)"><span class="play"></span></div></button>';
+  }).join("");
+
+  $("#songs").innerHTML=SONGS.map(function(s,i){
+    return '<button class="vid sq" data-song="'+i+'" aria-label="Play '+s.title+'"><div class="th" style="background-image:url('+ARTIST_IMG+')"><span class="play"></span></div><div class="meta"><b>'+s.title+'</b><span>Onozz</span></div></button>';
+  }).join("");
+
+  if(DRIVE_URL){$("#drive").hidden=false;$("#driveNav").hidden=false;$("#driveBtn").href=DRIVE_URL}
+
+  document.addEventListener("click",function(e){
+    var v=e.target.closest("[data-yt]"),s=e.target.closest("[data-song]");
+    if(v){
+      frame.className="fr v";sp.hidden=true;
+      frame.innerHTML='<iframe src="https://www.youtube.com/embed/'+v.dataset.yt+'?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen title="Video player"></iframe>';
+      dlg.showModal();
+    }else if(s){
+      var t=SONGS[+s.dataset.song],path=t.track?"track/"+t.track:"artist/"+SPOTIFY_ARTIST;
+      frame.className="fr";frame.style.height=t.track?"152px":"380px";
+      frame.innerHTML='<iframe src="https://open.spotify.com/embed/'+path+'" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify player"></iframe>';
+      sp.href="https://open.spotify.com/"+path;sp.hidden=false;
+      dlg.showModal();
+    }else if(e.target===dlg){dlg.close()}
+  });
+  $("#closeP").onclick=function(){dlg.close()};
+  dlg.addEventListener("close",function(){frame.innerHTML="";frame.style.height=""});
+})();
+</script>
+</body>
+</html>
